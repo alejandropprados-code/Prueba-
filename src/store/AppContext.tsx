@@ -22,8 +22,8 @@ import type {
   User,
 } from "../types";
 
-const STORAGE_KEY = "mediapp-state-v1";
-const SESSION_KEY = "mediapp-session-v1";
+const STORAGE_KEY = "mediapp-state-v2";
+const SESSION_KEY = "mediapp-session-v2";
 
 interface PersistedState {
   appointments: Appointment[];

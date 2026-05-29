@@ -20,6 +20,9 @@ function dateOffset(days: number): string {
   return d.toISOString().slice(0, 10);
 }
 
+// Un único perfil de médico y un único perfil de paciente, sincronizados:
+// la paciente es paciente de esta médica, así que todo lo que cree uno lo ve
+// el otro.
 export const doctors: Doctor[] = [
   {
     id: "d1",
@@ -28,14 +31,6 @@ export const doctors: Doctor[] = [
     specialty: "Medicina de familia",
     email: "elena.rios@mediapp.health",
     licenseNumber: "COL-28-45123",
-  },
-  {
-    id: "d2",
-    role: "doctor",
-    name: "Dr. Marcos Vidal",
-    specialty: "Cardiología",
-    email: "marcos.vidal@mediapp.health",
-    licenseNumber: "COL-28-78990",
   },
 ];
 
@@ -50,26 +45,6 @@ export const patients: Patient[] = [
     allergies: ["Penicilina"],
     healthCardNumber: "BDSS 123456789 01",
   },
-  {
-    id: "p2",
-    role: "patient",
-    name: "Javier Moreno",
-    email: "javier.moreno@email.com",
-    birthDate: "1978-11-30",
-    bloodType: "0-",
-    allergies: [],
-    healthCardNumber: "BDSS 987654321 02",
-  },
-  {
-    id: "p3",
-    role: "patient",
-    name: "Carmen Ortega",
-    email: "carmen.ortega@email.com",
-    birthDate: "1965-07-08",
-    bloodType: "B+",
-    allergies: ["Ibuprofeno", "Frutos secos"],
-    healthCardNumber: "BDSS 456789123 03",
-  },
 ];
 
 export const appointments: Appointment[] = [
@@ -83,36 +58,20 @@ export const appointments: Appointment[] = [
   },
   {
     id: "a2",
-    patientId: "p2",
+    patientId: "p1",
     doctorId: "d1",
-    datetime: dayOffset(0, 12, 0),
-    reason: "Dolor de garganta persistente",
+    datetime: dayOffset(4, 12, 0),
+    reason: "Resultados de analítica",
     status: "pendiente",
   },
   {
     id: "a3",
-    patientId: "p3",
-    doctorId: "d2",
-    datetime: dayOffset(2, 9, 0),
-    reason: "Control de tensión arterial",
-    status: "confirmada",
-  },
-  {
-    id: "a4",
     patientId: "p1",
-    doctorId: "d2",
-    datetime: dayOffset(-7, 11, 0),
-    reason: "Electrocardiograma de control",
-    status: "completada",
-    notes: "ECG normal. Repetir en 12 meses.",
-  },
-  {
-    id: "a5",
-    patientId: "p3",
     doctorId: "d1",
-    datetime: dayOffset(5, 16, 30),
-    reason: "Resultados de analítica",
-    status: "pendiente",
+    datetime: dayOffset(-10, 11, 0),
+    reason: "Dolor de garganta persistente",
+    status: "completada",
+    notes: "Faringitis vírica. Reposo e hidratación. Revisar si empeora.",
   },
 ];
 
@@ -131,25 +90,13 @@ export const prescriptions: Prescription[] = [
   },
   {
     id: "r2",
-    patientId: "p3",
-    doctorId: "d2",
-    medication: "Enalapril 10mg",
-    dosage: "1 comprimido",
-    frequency: "Una vez al día (mañana)",
-    durationDays: 90,
-    issuedDate: dateOffset(-20),
-    status: "activa",
-    instructions: "Control de tensión arterial. Tratamiento crónico.",
-  },
-  {
-    id: "r3",
-    patientId: "p2",
+    patientId: "p1",
     doctorId: "d1",
-    medication: "Amoxicilina 500mg",
-    dosage: "1 cápsula",
+    medication: "Ibuprofeno 600mg",
+    dosage: "1 comprimido",
     frequency: "Cada 12 horas",
     durationDays: 7,
-    issuedDate: dateOffset(-40),
+    issuedDate: dateOffset(-30),
     status: "finalizada",
   },
 ];
